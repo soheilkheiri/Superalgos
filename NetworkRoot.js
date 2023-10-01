@@ -55,7 +55,8 @@ exports.newNetworkRoot = function newNetworkRoot() {
             graphql: require("@octokit/graphql"),
             axios: require('axios'),
             crypto: require('crypto'),
-            octokit: require('@octokit/rest')
+            octokit: require('@octokit/rest'),
+            childProcess: require('child_process')
         }
         SA.version = require('./package.json').version
 
@@ -73,6 +74,14 @@ exports.newNetworkRoot = function newNetworkRoot() {
         */
         let SECRETS = require('./Secrets.js').newSecrets()
         SECRETS.initialize()
+
+        /*
+         * If the network is using a local database then check and run any migrations first
+         */
+        if(global.env.DATABASE.TYPE == 'database') {
+            await SA.projects.localStorage.globals.persistence.newPersistenceStore(global.env.DATABASE.TYPE, 'migrate')
+                .then(() => SA.logger.info('Database migrations have run'))
+        }
 
         NT.app = require('./Network/NetwokApp.js').newNetworkApp()
         NT.app.run()

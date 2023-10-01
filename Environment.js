@@ -62,6 +62,10 @@ exports.newEnvironment = function () {
             'https://code.jquery.com/jquery-3.6.0.js',
             'https://code.jquery.com/ui/1.13.0/jquery-ui.js'
         ],
+        DATABASE: {
+            TYPE: 'file',
+            USERS_TABLE: path.join(basePath, './Platform/My-Data-Storage/Network/userProfileBalances.json')
+        },
     }
 
     setProfileOverrideValues()
@@ -96,15 +100,29 @@ exports.newEnvironment = function () {
         if(profile.portWssPlatform !== undefined) { thisObject.PLATFORM_WEB_SOCKETS_INTERFACE_PORT = profile.portWssPlatform }
         if(profile.portWssNetwork !== undefined) { thisObject.NETWORK_WEB_SOCKETS_INTERFACE_PORT = profile.portWssNetwork }
         if(profile.portWssDashboard !== undefined) { thisObject.DASHBOARDS_WEB_SOCKETS_INTERFACE_PORT = profile.portWssDashboard }
-        if(profile.portWssDesktop !== undefined) { thisObject.DESKTOP_WEB_SOCKETS_INTERFACE_PORT = profile.portWssDesktop }
-        if(profile.hostDesktop !== undefined) { thisObject.DESKTOP_WEB_SOCKETS_INTERFACE_HOST = profile.hostDesktop }
+        if(profile.portWssDesktop !== undefined) { thisObject.SOCIALTRADING_WEB_SOCKETS_INTERFACE_PORT = profile.portWssDesktop }
+        if(profile.hostDesktop !== undefined) { thisObject.SOCIALTRADING_WEB_SOCKETS_INTERFACE_HOST = profile.hostDesktop }
         if(profile.portHttpPlatform !== undefined) { thisObject.PLATFORM_HTTP_INTERFACE_PORT = profile.portHttpPlatform }
-        if(profile.portHttpDesktop !== undefined) { thisObject.DESKTOP_HTTP_INTERFACE_PORT = profile.portHttpDesktop }
+        if(profile.portHttpDesktop !== undefined) { thisObject.SOCIALTRADING_HTTP_INTERFACE_PORT = profile.portHttpDesktop }
         if(profile.portHttpNetwork !== undefined) { thisObject.NETWORK_HTTP_INTERFACE_PORT = profile.portHttpNetwork }
         if(profile.storeData !== undefined) { thisObject.PATH_TO_DATA_STORAGE = profile.storeData }
         if(profile.storeLogs !== undefined) { thisObject.PATH_TO_LOG_FILES = profile.storeLogs }
         if(profile.storeWorkspaces !== undefined) { thisObject.PATH_TO_MY_WORKSPACES = profile.storeWorkspaces }
         if(profile.logLevel !== undefined) { thisObject.LOG_LEVEL = profile.logLevel }
+        if(profile.p2pNetworkNodeSigningAccount !== undefined) { thisObject.P2P_NETWORK_NODE_SIGNING_ACCOUNT = profile.p2pNetworkNodeSigningAccount }
+        if(profile.database !== undefined) {
+            if(profile.database.type !== undefined) { 
+                thisObject.DATABASE.TYPE = profile.database.type 
+                if(profile.database.type == 'database') {
+                    thisObject.DATABASE.database = profile.database.database
+                    thisObject.DATABASE.host = profile.database.host
+                    thisObject.DATABASE.password = profile.database.password
+                    thisObject.DATABASE.port = profile.database.port
+                    thisObject.DATABASE.user = profile.database.user
+                }
+            }
+            if(profile.database.users_table !== undefined) { thisObject.DATABASE.USERS_TABLE = profile.database.users_table }
+        }
     }
 
     function setLogLevelIfAvailable() {

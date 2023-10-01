@@ -1,6 +1,6 @@
 {
     "tutorial": "Beyond the Basics",
-    "pageNumber": "1",
+    "pageNumber": 1,
     "type": "Beyond the Basics Tutorial",
     "definition": {
         "text": "This tutorial covers the setup to allow the app to interact with your Github fork, the commands to update the app, switching branches, and how to contribute to the project.",
@@ -69,7 +69,7 @@
         },
         {
             "style": "List",
-            "text": "Workspace: Getting Started Sample Workspace.",
+            "text": "Workspace: Getting Started Native Workspace.",
             "translations": [
                 {
                     "language": "TR",
@@ -79,7 +79,7 @@
                 },
                 {
                     "language": "ES",
-                    "text": "Workspace: Getting Started Tutorials Sample Workspace.",
+                    "text": "Workspace: Getting Started Tutorials Native Workspace.",
                     "updated": 1675448884756
                 }
             ]
